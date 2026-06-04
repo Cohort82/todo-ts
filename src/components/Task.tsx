@@ -11,6 +11,8 @@ const Task = ({children, remove, position, edit}: TaskProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const textId = useRef<HTMLTextAreaElement>(null);
 
+    console.log(`Task rendered: ${children}, position: ${position}`);
+
     const handleClickEdit = () => {
         setIsEditing(true);
     }
