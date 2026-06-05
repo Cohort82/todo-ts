@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {memo, useRef, useState} from "react";
 
 interface TaskProps {
     children: string;
@@ -44,4 +44,4 @@ const Task = ({children, remove, position, edit}: TaskProps) => {
     }
 }
 
-export default Task;
+export default memo(Task);

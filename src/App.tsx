@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState, useCallback} from 'react'
 import './App.css'
 import Task from "./components/Task.tsx";
 
@@ -7,20 +7,18 @@ function App() {
 
     console.log(`App rendered`);
 
-    const deleteTask = (index: number) => {
-        const tasksCopy = [...tasks];
-        tasksCopy.splice(index, 1);
-        setTasks(tasksCopy);
-    }
+    const deleteTask = useCallback((index: number) => setTasks(prevState => prevState.filter((_, i) => i !== index)), [])
 
-    const updateTask = (index: number, value: string) => {
-        const tasksCopy = [...tasks];
-        tasksCopy[index] = value;
-        setTasks(tasksCopy);
-    }
+    const updateTask = useCallback((index: number, value: string) => {
+        setTasks(prevState => {
+            const tasksCopy = [...prevState];
+            tasksCopy[index] = value;
+            return tasksCopy;
+        });
+    }, [])
 
     const addTask = () => {
-        setTasks([...tasks, 'New task']);
+        setTasks(prevState => [...prevState, 'New task']);
     }
 
     return (
