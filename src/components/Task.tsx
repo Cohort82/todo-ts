@@ -2,27 +2,27 @@ import {memo, useRef, useState} from "react";
 
 interface TaskProps {
     children: string;
-    position: number;
+    id: number;
     remove: (index: number) => void;
     edit: (index: number, value: string) => void;
 }
 
-const Task = ({children, remove, position, edit}: TaskProps) => {
+const Task = ({children, remove, id, edit}: TaskProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const textId = useRef<HTMLTextAreaElement>(null);
 
-    console.log(`Task rendered: ${children}, position: ${position}`);
+    console.log(`Task rendered: ${children}, id: ${id}`);
 
     const handleClickEdit = () => {
         setIsEditing(true);
     }
 
     const handleClickRemove = () => {
-        remove(position);
+        remove(id);
     }
 
     const handleClickSave = () => {
-        edit(position, textId.current!.value);
+        edit(id, textId.current!.value);
         setIsEditing(false);
     }
 
